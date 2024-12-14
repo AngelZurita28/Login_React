@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -24,24 +25,49 @@ function Dashboard() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          Bienvenido {email}
-        </h2>
-        <div className="space-y-4">
-          <button
-            onClick={handleLogout}
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-          >
-            Cerrar Sesión
-          </button>
-          <button
-            onClick={handleDeleteAccount}
-            className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
-          >
-            Eliminar Cuenta
-          </button>
+    <div
+      className="d-flex justify-content-center align-items-center vh-100"
+      style={{ backgroundColor: "#121212" }}
+    >
+      <div
+        className="card shadow-lg"
+        style={{
+          width: "24rem",
+          backgroundColor: "#1e1e1e",
+          color: "#e0e0e0",
+          border: "none",
+        }}
+      >
+        <div className="card-body text-center">
+          <h2 className="card-title mb-4" style={{ color: "#ffffff" }}>
+            Bienvenido {email}
+          </h2>
+          <div className="d-grid gap-3">
+            <button
+              onClick={handleLogout}
+              className="btn"
+              style={{
+                backgroundColor: "#3a3a3a",
+                color: "#ffffff",
+                border: "none",
+                padding: "10px",
+              }}
+            >
+              Cerrar Sesión
+            </button>
+            <button
+              onClick={handleDeleteAccount}
+              className="btn"
+              style={{
+                backgroundColor: "#d32f2f",
+                color: "#ffffff",
+                border: "none",
+                padding: "10px",
+              }}
+            >
+              Eliminar Cuenta
+            </button>
+          </div>
         </div>
       </div>
     </div>
