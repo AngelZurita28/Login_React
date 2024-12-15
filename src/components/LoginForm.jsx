@@ -8,11 +8,26 @@ function LoginForm() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const getLocalIp = async () => {
+    try {
+      const response = await axios.get(
+        "http://192.168.1.74:3000/api/auth/get-ip"
+      );
+      return response.data.ip;
+    } catch (error) {
+      console.error("Error al obtener la IP local", error);
+      return "localhost"; // Valor por defecto si hay un error
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    const localIp = await getLocalIp();
+    localStorage.setItem("localIp", localIp);
+    // window.alert(localStorage.getItem("localIp"));
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        `http://${localStorage.getItem("localIp")}:3000/api/auth/login`,
         {
           email,
           password,

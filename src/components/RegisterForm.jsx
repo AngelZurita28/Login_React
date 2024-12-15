@@ -12,7 +12,7 @@ function RegisterForm() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/register",
+        `http://${localStorage.getItem("localIp")}:3000/api/auth/register`,
         {
           email,
           password,

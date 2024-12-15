@@ -1,0 +1,23 @@
+const os = require("os");
+const express = require("express");
+const router = express.Router();
+
+// Función para obtener la IP local
+function getLocalIP() {
+  const networkInterfaces = os.networkInterfaces();
+  let ip = "localhost"; // Valor por defecto (localhost)
+
+  for (let interfaceName in networkInterfaces) {
+    networkInterfaces[interfaceName].forEach((network) => {
+      if (network.family === "IPv4" && !network.internal) {
+        ip = network.address;
+      }
+    });
+  }
+  return ip;
+}
+
+router.get("/api/get-ip", (req, res) => {
+  const ip = getLocalIP(); // Llamas a la función para obtener la IP
+  res.json({ ip });
+});

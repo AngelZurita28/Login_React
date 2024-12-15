@@ -11,9 +11,14 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/api/auth/forgot-password", {
-        email,
-      });
+      await axios.post(
+        `http://${localStorage.getItem(
+          "localIp"
+        )}:3000/api/auth/forgot-password`,
+        {
+          email,
+        }
+      );
       localStorage.setItem("resetEmail", email);
       setSuccess("Código enviado al correo");
       setTimeout(() => {

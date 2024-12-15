@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -19,10 +19,15 @@ function ResetPassword() {
     }
 
     try {
-      await axios.post("http://localhost:3000/api/auth/reset-password", {
-        email,
-        password,
-      });
+      await axios.post(
+        `http://${localStorage.getItem(
+          "localIp"
+        )}:3000/api/auth/reset-password`,
+        {
+          email,
+          password,
+        }
+      );
 
       localStorage.removeItem("resetEmail");
       navigate("/");
@@ -32,6 +37,15 @@ function ResetPassword() {
       );
     }
   };
+
+  // Validación para habilitar el botón
+  useEffect(() => {
+    if (password && confirmPassword && password === confirmPassword) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [password, confirmPassword]);
 
   return (
     <div
@@ -128,17 +142,19 @@ function ResetPassword() {
             </div>
             <button
               type="submit"
-              className="w-full"
+              disabled={!isFormValid}
               style={{
-                backgroundColor: "#3a3a3a",
+                backgroundColor: isFormValid ? "#4CAF50" : "#2d2d2d", // Color cuando es válido vs. inválido
                 color: "#ffffff",
                 border: "none",
-                padding: "12px",
+                padding: "10px",
                 borderRadius: "8px",
                 fontWeight: "bold",
                 width: "calc(100% - 24px)",
                 margin: "0 12px",
-                cursor: "pointer",
+                marginTop: "16px", // Agrega separación en la parte superior del botón
+                cursor: isFormValid ? "pointer" : "not-allowed",
+                transition: "background-color 0.3s ease",
               }}
             >
               Actualizar Contraseña

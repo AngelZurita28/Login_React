@@ -14,9 +14,14 @@ function Dashboard() {
 
   const handleDeleteAccount = async () => {
     try {
-      await axios.post("http://localhost:3000/api/auth/delete-account", {
-        email,
-      });
+      await axios.post(
+        `http://${localStorage.getItem(
+          "localIp"
+        )}:3000/api/auth/delete-account`,
+        {
+          email,
+        }
+      );
       localStorage.removeItem("userEmail");
       navigate("/");
     } catch (error) {

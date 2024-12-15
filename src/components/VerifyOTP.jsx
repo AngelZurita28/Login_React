@@ -32,10 +32,13 @@ function VerifyOTP() {
 
     try {
       // Envia la solicitud con la cadena de OTP
-      await axios.post("http://localhost:3000/api/auth/verify-otp", {
-        email,
-        otp: otpString, // Envia el OTP como una cadena
-      });
+      await axios.post(
+        `http://${localStorage.getItem("localIp")}:3000/api/auth/verify-otp`,
+        {
+          email,
+          otp: otpString, // Envia el OTP como una cadena
+        }
+      );
       navigate("/reset-password");
     } catch (error) {
       setError(error.response?.data?.message || "Error al verificar el código");

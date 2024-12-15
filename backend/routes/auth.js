@@ -3,6 +3,28 @@ const router = express.Router();
 const { sendOTP } = require("../utils/emailService");
 const crypto = require("crypto");
 const pool = require("../config/db");
+const os = require("os");
+
+function getLocalIP() {
+  const networkInterfaces = os.networkInterfaces();
+  let ip;
+  for (let interfaceName in networkInterfaces) {
+    networkInterfaces[interfaceName].forEach((network) => {
+      if (network.family === "IPv4" && !network.internal) {
+        if (!ip) {
+          ip = network.address;
+          console.log(ip);
+        }
+      }
+    });
+  }
+  return ip;
+}
+
+router.get("/get-ip", (req, res) => {
+  const ip = getLocalIP(); // Llamas a la función para obtener la IP
+  res.json({ ip });
+});
 
 router.post("/login", async (req, res) => {
   try {
