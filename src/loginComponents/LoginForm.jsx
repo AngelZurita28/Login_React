@@ -35,7 +35,7 @@ function LoginForm() {
       );
 
       localStorage.setItem("userEmail", email);
-      navigate("/dashboard");
+      window.location.reload();
     } catch (error) {
       setError(error.response?.data?.message || "Error al iniciar sesión");
     }
@@ -46,45 +46,27 @@ function LoginForm() {
   };
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center vh-100"
-      style={{ backgroundColor: "#121212" }}
-    >
-      <div
-        className="card shadow-lg"
-        style={{
-          width: "24rem",
-          backgroundColor: "#1e1e1e",
-          color: "#e0e0e0",
-          border: "none",
-        }}
-      >
-        <div className="card-body">
-          <h2
-            className="card-title text-center mb-4"
-            style={{ color: "#ffffff" }}
-          >
+    <>
+      <div className="flex items-center justify-center min-h-screen bg-gray-900">
+        <div className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-center text-gray-100 mb-6">
             Iniciar Sesión
           </h2>
+
           {error && (
             <div
-              className="alert"
-              style={{
-                backgroundColor: "#3a3a3a",
-                color: "#ff6b6b",
-                border: "none",
-              }}
+              className="p-2 text-sm text-red-700 bg-red-500 rounded"
               role="alert"
             >
               {error}
             </div>
           )}
-          <form onSubmit={handleLogin}>
-            <div className="mb-3">
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
               <label
                 htmlFor="email"
-                className="form-label"
-                style={{ color: "#e0e0e0" }}
+                className="block text-sm font-medium text-gray-300"
               >
                 Correo Electrónico
               </label>
@@ -93,20 +75,15 @@ function LoginForm() {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="form-control"
-                style={{
-                  backgroundColor: "#2a2a2a",
-                  color: "#ffffff",
-                  border: "1px solid #3a3a3a",
-                }}
                 required
+                className="w-full px-3 py-2 mt-1 text-sm border rounded-md shadow-sm bg-gray-700 text-gray-100 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
-            <div className="mb-3">
+
+            <div>
               <label
                 htmlFor="password"
-                className="form-label"
-                style={{ color: "#e0e0e0" }}
+                className="block text-sm font-medium text-gray-300"
               >
                 Contraseña
               </label>
@@ -115,45 +92,30 @@ function LoginForm() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="form-control"
-                style={{
-                  backgroundColor: "#2a2a2a",
-                  color: "#ffffff",
-                  border: "1px solid #3a3a3a",
-                }}
                 required
+                className="w-full px-3 py-2 mt-1 text-sm border rounded-md shadow-sm bg-gray-700 text-gray-100 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
-            <div className="d-grid gap-2">
-              <button
-                type="submit"
-                className="btn"
-                style={{
-                  backgroundColor: "#4caf50",
-                  color: "#ffffff",
-                  border: "none",
-                }}
-              >
-                Iniciar Sesión
-              </button>
-              <button
-                type="button"
-                onClick={handleNavigateToRegister}
-                className="btn"
-                style={{
-                  backgroundColor: "#3a3a3a",
-                  color: "#ffffff",
-                  border: "none",
-                }}
-              >
-                Ir a Registro
-              </button>
-            </div>
-            <div className="text-center mt-3">
+
+            <button
+              type="submit"
+              className="w-full py-2 mt-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              Iniciar Sesión
+            </button>
+
+            <button
+              type="button"
+              onClick={handleNavigateToRegister}
+              className="w-full py-2 mt-4 text-blue-600 font-semibold border-2 border-blue-600 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              Ir a Registro
+            </button>
+
+            <div className="text-center mt-4">
               <Link
                 to="/forgot-password"
-                className="text-decoration-none"
-                style={{ color: "#4fc3f7" }}
+                className="text-sm text-blue-400 hover:underline"
               >
                 ¿Olvidaste tu contraseña?
               </Link>
@@ -161,7 +123,7 @@ function LoginForm() {
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

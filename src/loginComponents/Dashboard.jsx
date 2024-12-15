@@ -30,45 +30,20 @@ function Dashboard() {
   };
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center vh-100"
-      style={{ backgroundColor: "#121212" }}
-    >
-      <div
-        className="card shadow-lg"
-        style={{
-          width: "24rem",
-          backgroundColor: "#1e1e1e",
-          color: "#e0e0e0",
-          border: "none",
-        }}
-      >
+    <div className="flex justify-center items-center min-h-screen bg-[#121212]">
+      <div className="card shadow-lg w-[24rem] bg-[#1e1e1e] text-[#e0e0e0] border-none">
         <div className="card-body text-center">
-          <h2 className="card-title mb-4" style={{ color: "#ffffff" }}>
-            Bienvenido {email}
-          </h2>
-          <div className="d-grid gap-3">
+          <h2 className="card-title mb-4 text-white">Bienvenido {email}</h2>
+          <div className="grid gap-3">
             <button
               onClick={handleLogout}
-              className="btn"
-              style={{
-                backgroundColor: "#3a3a3a",
-                color: "#ffffff",
-                border: "none",
-                padding: "10px",
-              }}
+              className="btn bg-[#3a3a3a] text-white border-none py-2"
             >
               Cerrar Sesión
             </button>
             <button
               onClick={handleDeleteAccount}
-              className="btn"
-              style={{
-                backgroundColor: "#d32f2f",
-                color: "#ffffff",
-                border: "none",
-                padding: "10px",
-              }}
+              className="btn bg-[#d32f2f] text-white border-none py-2"
             >
               Eliminar Cuenta
             </button>

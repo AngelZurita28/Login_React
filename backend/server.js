@@ -1,6 +1,5 @@
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
-// require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
@@ -33,10 +32,10 @@ app.listen(3000, "0.0.0.0", () => {
   //     console.error("Error al obtener:", error.message);
   //   }
   // })();
-  (async () => {
-    const gameId = 159190; // ID del juego para el cual deseas obtener los personajes
-    const gameDetails = await getGameDetails(gameId);
-    console.log("Detalles del juego:", gameDetails);
-  })();
+  // (async () => {
+  //   const gameId = 159190; // ID del juego para el cual deseas obtener los personajes
+  //   const gameDetails = await getGameDetails(gameId);
+  //   console.log("Detalles del juego:", gameDetails);
+  // })();
   console.log("Servidor escuchando en puerto 3000");
 });

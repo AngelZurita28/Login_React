@@ -48,47 +48,24 @@ function VerifyOTP() {
   const isOtpComplete = otp.every((digit) => digit !== "");
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center vh-100"
-      style={{ backgroundColor: "#121212" }}
-    >
-      <div
-        className="card shadow-lg"
-        style={{
-          width: "24rem",
-          backgroundColor: "#1e1e1e",
-          color: "#e0e0e0",
-          border: "none",
-          borderRadius: "10px",
-          padding: "20px",
-        }}
-      >
-        <div className="card-body text-center">
-          <h2 className="card-title mb-4" style={{ color: "#ffffff" }}>
+    <div className="flex justify-center items-center min-h-screen bg-[#121212]">
+      <div className="w-full max-w-md bg-[#1e1e1e] text-[#e0e0e0] rounded-xl p-5 shadow-lg">
+        <div className="text-center">
+          <h2 className="text-white mb-4 text-2xl font-bold">
             Verificar Código
           </h2>
+
           {error && (
-            <div
-              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
-              style={{
-                color: "#fff",
-                backgroundColor: "#ff0000",
-                borderColor: "#ff3333",
-              }}
-            >
+            <div className="bg-[#ff0000] border-[#ff3333] text-white px-4 py-3 rounded mb-4">
               {error}
             </div>
           )}
+
           <form
             onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+            className="flex flex-col items-center justify-center space-y-4"
           >
-            <div className="mb-4" style={{ display: "flex", gap: "10px" }}>
+            <div className="mb-4 flex gap-2">
               {[...Array(6)].map((_, index) => (
                 <input
                   key={index}
@@ -97,40 +74,22 @@ function VerifyOTP() {
                   value={otp[index] || ""}
                   onChange={(e) => handleInputChange(e, index)}
                   maxLength="1"
-                  className="otp-input"
-                  style={{
-                    backgroundColor: "#2d2d2d",
-                    color: "#e0e0e0",
-                    textAlign: "center",
-                    width: "40px",
-                    height: "40px",
-                    fontSize: "20px",
-                    borderRadius: "8px",
-                    margin: "0 5px",
-                    border: "none",
-                    outline: "none",
-                    boxShadow: "none",
-                    transition: "border-color 0.3s ease, box-shadow 0.3s ease",
-                  }}
+                  className="w-[40px] h-[40px] text-center text-[#e0e0e0] bg-[#2d2d2d] font-size-[20px] rounded-lg border-none focus:outline-none focus:ring-2 focus:ring-[#6441a5] transition-all duration-300"
                 />
               ))}
             </div>
+
             <button
               type="submit"
-              className="w-full"
+              disabled={!isOtpComplete}
+              className={`${
+                isOtpComplete
+                  ? "bg-[#6441a5] cursor-pointer"
+                  : "bg-[#3a3a3a] cursor-not-allowed"
+              } text-white py-3 rounded-lg font-bold w-full mt-4 transition-all duration-300`}
               style={{
-                backgroundColor: isOtpComplete ? "#6441a5" : "#3a3a3a",
-                color: "#ffffff",
-                border: "none",
-                padding: "12px",
-                borderRadius: "8px",
-                fontWeight: "bold",
-                width: "calc(100% - 24px)",
-                margin: "0 12px",
-                cursor: isOtpComplete ? "pointer" : "not-allowed",
                 opacity: isOtpComplete ? 1 : 0.6,
               }}
-              disabled={!isOtpComplete}
             >
               Verificar Código
             </button>
